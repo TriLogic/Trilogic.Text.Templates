@@ -8,7 +8,7 @@
 * Dynamic (delegate based) value lookup
 * Compiled templates for execution against single or multiple sets of data
 * Templates sourced from your choice of: char[], string, or StringBuilder
-* Object extenders availble for popular text sources including string, StringBuilder, char[] and various IO streams
+* Object extenders available for popular text sources including string, StringBuilder, char[] and various IO streams
 
 **To Do:**
 - [ ] Recreate Unit Tests
