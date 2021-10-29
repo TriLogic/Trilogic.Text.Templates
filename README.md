@@ -11,5 +11,5 @@
 * Object extenders availble for popular text sources including string, StringBuilder, char[] and various IO streams.
 
 ** To Do: **
-[ ] Recreate Unit Tests
-[ ] Create small console demo program
+- [ ] Recreate Unit Tests
+- [ ] Create small console demo program
