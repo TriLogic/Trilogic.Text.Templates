@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Trilogic.Text.Templates
 {
@@ -128,6 +126,7 @@ namespace Trilogic.Text.Templates
         }
         #endregion
 
+        #region Static Compile Method
         public static TextTemplate Compile(ITextSource source)
         {
             List<TemplateToken> tokens = TagTokenizer.Tokenize(source);
@@ -161,5 +160,6 @@ namespace Trilogic.Text.Templates
                 mTokens = tokens
             };
         }
+        #endregion
     }
 }
