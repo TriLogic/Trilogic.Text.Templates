@@ -3,7 +3,7 @@
 
 **The main features of this library are:**
 * Simple tag structure **${tag}**
-* Tags within tags allowed **${tag1${tag_2}}**
+* Tags within tags allowed **${tag1${tag_2}} or ${${tag_1}tag_2}**
 * Ease of use
 * Dynamic (delegate based) value lookup
 * Compiled templates for execution against single or multiple sets of data
