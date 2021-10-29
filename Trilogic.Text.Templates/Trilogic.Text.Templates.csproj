@@ -7,11 +7,12 @@
     <ProjectGuid>{E00E653D-C2C4-40E2-99CE-04FF15BB9F4A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Trilogic.Text.TagReplacer</RootNamespace>
-    <AssemblyName>Trilogic.Text.TagReplacer</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <RootNamespace>Trilogic.Text.Templates</RootNamespace>
+    <AssemblyName>Trilogic.Text.Templates</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,11 +42,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ITagPattern.cs" />
-    <Compile Include="TagReplacer.cs" />
-    <Compile Include="TagToken.cs" />
-    <Compile Include="TagTokenizer.cs" />
+    <Compile Include="Extensions\CharArrayTemplateExt.cs" />
+    <Compile Include="Extensions\StreamTemplateExt.cs" />
+    <Compile Include="Extensions\StringBuilderTemplateExt.cs" />
+    <Compile Include="Extensions\StringTemplateExt.cs" />
+    <Compile Include="Extensions\StreamReaderTemplateExt.cs" />
+    <Compile Include="Extensions\TextReaderTemplateExt.cs" />
+    <Compile Include="TextSource\StringTextSource.cs" />
+    <Compile Include="TextSource\StringBuilderTextSource.cs" />
+    <Compile Include="TextSource\CharArrayTextSource.cs" />
+    <Compile Include="TextSource\ITextSource.cs" />
+    <Compile Include="TextTemplate.cs" />
+    <Compile Include="Compiler\TemplateToken.cs" />
+    <Compile Include="Compiler\TemplateTokenizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.852
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trilogic.Text.TagReplacer", "Trilogic.Text.TagReplacer\Trilogic.Text.TagReplacer.csproj", "{E00E653D-C2C4-40E2-99CE-04FF15BB9F4A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trilogic.Text.Templates", "Trilogic.Text.Templates\Trilogic.Text.Templates.csproj", "{E00E653D-C2C4-40E2-99CE-04FF15BB9F4A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

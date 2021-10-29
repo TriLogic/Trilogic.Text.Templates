@@ -4,25 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Trilogic.Text.TagReplacer
+namespace Trilogic.Text.Templates
 {
     internal class TagTokenizer
     {
         #region Class Members
-        ITagPattern mBuf;
+        ITextSource mBuf;
 
         int mIdx = 0;
         #endregion
 
         #region Constructors and Destructors
-        public TagTokenizer(ITagPattern buf)
+        public TagTokenizer(ITextSource buf)
         {
             Reset(buf);
         }
         #endregion
 
         #region Reset
-        public void Reset(ITagPattern buf)
+        public void Reset(ITextSource buf)
         {
             mBuf = buf;
             mIdx = 0;
@@ -30,7 +30,7 @@ namespace Trilogic.Text.TagReplacer
         #endregion
 
         #region Token Retreival
-        public TagToken GetToken()
+        public TemplateToken GetToken()
         {
             int offst = mIdx;
             int chars = 0;
@@ -43,10 +43,10 @@ namespace Trilogic.Text.TagReplacer
                 if (tkc == '}')
                 {
                     if (chars > 0)
-                        return new TagToken(TokenType.TkTXT, offst, chars);
+                        return new TemplateToken(TemplateTokenType.TkTXT, offst, chars);
 
                     mIdx++;
-                    return new TagToken(TokenType.TkRHT, mIdx, 1);
+                    return new TemplateToken(TemplateTokenType.TkRHT, mIdx, 1);
                 }
 
                 // LHT or Escape
@@ -59,20 +59,20 @@ namespace Trilogic.Text.TagReplacer
                         if (mBuf[mIdx + 1] == '$' || mBuf[mIdx + 1] == '}')
                         {
                             if (chars > 0)
-                                return new TagToken(TokenType.TkTXT, offst, chars);
+                                return new TemplateToken(TemplateTokenType.TkTXT, offst, chars);
 
                             mIdx += 2;
-                            return new TagToken(TokenType.TkTXT, offst + 1, 1);
+                            return new TemplateToken(TemplateTokenType.TkTXT, offst + 1, 1);
                         }
 
                         // Is this a LHT - ${
                         if (mBuf[mIdx + 1] == '{')
                         {
                             if (chars > 0)
-                                return new TagToken(TokenType.TkTXT, offst, chars);
+                                return new TemplateToken(TemplateTokenType.TkTXT, offst, chars);
 
                             mIdx += 2;
-                            return new TagToken(TokenType.TkLHT, offst, 2);
+                            return new TemplateToken(TemplateTokenType.TkLHT, offst, 2);
                         }
 
                         // Dangling '$' char fall though
@@ -86,56 +86,56 @@ namespace Trilogic.Text.TagReplacer
 
             // if we have a token value
             if (chars > 0)
-                return new TagToken(TokenType.TkTXT, offst, chars);
+                return new TemplateToken(TemplateTokenType.TkTXT, offst, chars);
 
             // No more tokens
             return null;
         }
 
-        public List<TagToken> GetTokens()
+        public List<TemplateToken> GetTokens()
         {
-            List<TagToken> list = new List<TagToken>();
-            TagToken tkn = GetToken();
-            while ((tkn = GetToken() ) != null)
-                list.Add(tkn);
+            List<TemplateToken> list = new List<TemplateToken>();
+            TemplateToken token;
+            while ((token = GetToken()) != null)
+                list.Add(token);
             return list;
         }
-        public List<TagToken> GetTokens(ITagPattern pattern)
+        public List<TemplateToken> GetTokens(ITextSource pattern)
         {
             Reset(pattern);
             return GetTokens();
         }
-        public List<TagToken> GetTokens(string pattern)
+        public List<TemplateToken> GetTokens(string pattern)
         {
-            Reset(new StringTagPattern(pattern));
+            Reset(new StringTextSource(pattern));
             return GetTokens();
         }
-        public List<TagToken> GetTokens(StringBuilder pattern)
+        public List<TemplateToken> GetTokens(StringBuilder pattern)
         {
-            Reset(new StringBuilderTagPattern(pattern));
+            Reset(new StringBuilderTextSource(pattern));
             return GetTokens();
         }
-        public List<TagToken> GetTokens(char[] pattern)
+        public List<TemplateToken> GetTokens(char[] pattern)
         {
-            Reset(new CharArrayTagPattern(pattern));
+            Reset(new CharArrayTextSource(pattern));
             return GetTokens();
         }
 
-        public static List<TagToken> Tokenize(ITagPattern pattern)
+        public static List<TemplateToken> Tokenize(ITextSource pattern)
         {
             return new TagTokenizer(pattern).GetTokens();
         }
-        public static List<TagToken> Tokenize(string pattern)
+        public static List<TemplateToken> Tokenize(string pattern)
         {
-            return new TagTokenizer(new StringTagPattern(pattern)).GetTokens();
+            return new TagTokenizer(new StringTextSource(pattern)).GetTokens();
         }
-        public static List<TagToken> Tokenize(StringBuilder pattern)
+        public static List<TemplateToken> Tokenize(StringBuilder pattern)
         {
-            return new TagTokenizer(new StringBuilderTagPattern(pattern)).GetTokens();
+            return new TagTokenizer(new StringBuilderTextSource(pattern)).GetTokens();
         }
-        public static List<TagToken> Tokenize(char[] pattern)
+        public static List<TemplateToken> Tokenize(char[] pattern)
         {
-            return new TagTokenizer(new CharArrayTagPattern(pattern)).GetTokens();
+            return new TagTokenizer(new CharArrayTextSource(pattern)).GetTokens();
         }
 
         #endregion
